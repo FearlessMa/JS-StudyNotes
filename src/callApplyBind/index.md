@@ -1,7 +1,7 @@
 # call、apply、bind 实现
 
 ```js
-    //call 不带参数基本实现
+    //1.call 不带参数基本实现
     const test = {
         name: 'test'
     };
@@ -19,7 +19,7 @@
     }
     testCall.newCall(test); //test
 
-    // call 待参数实现
+    // 2.call 待参数实现
     function testCall2(age, skill) {
         console.log('name', this.name, 'age', age, 'skill', skill);
     }
