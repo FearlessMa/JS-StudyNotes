@@ -19,4 +19,17 @@
     }
     const testCreate = newCreate({ a: 1 });
     console.log('testCreate: ', testCreate); //testCreate:  Fn {} 
+
+    // 柯里化实现new
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    function NewFn(fn) {
+        const newObj = {};
+        fn.apply(newObj, Array.prototype.slice.call(arguments, 1));
+        return newObj;
+    }
+    const newPerson = NewFn(Person,'ma',18);
+    console.log('newPerson: ', newPerson);
 ```
