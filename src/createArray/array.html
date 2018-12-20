@@ -56,10 +56,12 @@
         const createArr2 = function () {
             const arr = [];
             return function (m, n) {
+                // 通过闭包变量arr实现存储
                 arr.push(n);
                 if (arr.length == m) {
                     return arr;
                 }
+                // 通过递归调用实现m个n
                 arguments.callee(m, n);
             }
         }();

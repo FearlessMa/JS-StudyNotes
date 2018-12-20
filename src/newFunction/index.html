@@ -12,7 +12,9 @@
     <script>
         // new的实现
         const newObj = function (name, age) {
+            // 生成this指向新的堆内存空间
             const _this = Object.create({});
+            // 给新开辟的堆内存空间赋值
             _this.name = name;
             _this.age = age;
             return _this;
@@ -21,9 +23,11 @@
         console.log('test: ', test);
         // Object.create 实现
         function newCreate(objPrototype) {
+            // 构造函数Fn
             function Fn() { }
             Fn.prototype = objPrototype;
             Fn.prototype.construct = Fn;
+            // 调用create后返回新new生成的对象
             return new Fn()
         }
         const testCreate = newCreate({ a: 1 });
@@ -36,11 +40,22 @@
         }
         function NewFn(fn) {
             const newObj = {};
+            return function () {
+                fn.call(newObj, ...arguments);
+                return newObj;
+            }
+        }
+        const newPerson = NewFn(Person);
+        const person = newPerson('q', 18);
+        console.log('person: ', person);
+
+        function NewFn1(fn) {
+            const newObj = {};
             fn.apply(newObj, Array.prototype.slice.call(arguments, 1));
             return newObj;
         }
-        const newPerson = NewFn(Person,'ma',18);
-        console.log('newPerson: ', newPerson);
+        const newPerson1 = NewFn1(Person, 'ma', 18);
+        console.log('newPerson1: ', newPerson1);
     </script>
 </body>
 
