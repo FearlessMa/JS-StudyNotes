@@ -4,6 +4,7 @@
 * 引用类型 栈中存储指针，通过栈中指针找到堆中存储空间。Object、Array、Date、Error、Global、Function、RegExp、
 
 ## 浅克隆
+* 引用类型传递地址浅传递
 ```js
 // 浅克隆
 // 引用类型传递地址浅传递
@@ -16,6 +17,9 @@ console.log('obj.a: ', obj.a);//2
 ## 深克隆
 
 * 方法一
+  * 方法1 JSON.parse()、JSON.srtingify()
+  * 通过数据JSON化后变成字符串，字符串按值传递，然后反json化开辟新存储空间
+  * 缺点：不能够传递function
 
 ```js
 // 深克隆
@@ -32,9 +36,9 @@ console.log('jsonObj1: ', jsonObj1);//{a:'json'}
 console.log('jsonObjFun1: ', jsonObjFun1);//{}
 ```
 * 方法2
-
+  *  Object.assign() 只能复制第一层，深层无法复制，为地址引用
 ```js
-// 方法2 Object.assign() 只能复制第一层，深层无法复制，为引用地址
+// 方法2 Object.assign() 只能复制第一层，深层无法复制，为地址引用
 var objAssign = { a: 1, b: { c: { d: 2 } }, e: { f: 1 } };
 var objAssign1 = Object.assign({}, objAssign);
 objAssign1.a = "objAssign1";
@@ -56,7 +60,7 @@ console.log('objAssign: ', objAssign);
 ```
 
 * 方法3
-
+    * 使用递归实现深度克隆
 ```js
 //方法3 使用递归实现深度克隆
 const test1 = '123';
