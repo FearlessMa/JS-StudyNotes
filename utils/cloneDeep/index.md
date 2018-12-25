@@ -1,0 +1,97 @@
+# 深克隆、浅克隆
+
+* js 基本类型按值传递 栈中存储值 Number、String、Boolean、null、undefined、Symbol
+* 引用类型 栈中存储指针，通过栈中指针找到堆中存储空间。Object、Array、Date、Error、Global、Function、RegExp、
+
+## 浅克隆
+```js
+// 浅克隆
+// 引用类型传递地址浅传递
+var obj = { a: 1 };
+var obj1 = obj;
+obj1.a = 2;
+console.log('obj.a: ', obj.a);//2
+```
+
+## 深克隆
+
+* 方法一
+
+```js
+// 深克隆
+// 方法1 JSON.parse()、JSON.srtingify()
+var jsonObj = { a: 1 };
+var jsonObjFun = { a: function () { name: 'function' } };
+//通过数据JSON化后变成字符串，字符串按值传递，然后反json化开辟新存储空间
+// 缺点：不能够传递function
+var jsonObj1 = JSON.parse(JSON.stringify(jsonObj));
+var jsonObjFun1 = JSON.parse(JSON.stringify(jsonObjFun));
+jsonObj1.a = 'json';
+console.log('jsonObj: ', jsonObj);//{a:1}
+console.log('jsonObj1: ', jsonObj1);//{a:'json'}
+console.log('jsonObjFun1: ', jsonObjFun1);//{}
+```
+* 方法2
+
+```js
+// 方法2 Object.assign() 只能复制第一层，深层无法复制，为引用地址
+var objAssign = { a: 1, b: { c: { d: 2 } }, e: { f: 1 } };
+var objAssign1 = Object.assign({}, objAssign);
+objAssign1.a = "objAssign1";
+objAssign1.e.f = "objAssign1";
+objAssign1.b = 'objAssign1';
+
+console.log('objAssign1: ', objAssign1);
+// {
+//     a: "objAssign1",
+//     b: 'objAssign1',
+//     e:{f:"objAssign1"}
+// }
+console.log('objAssign: ', objAssign);
+// {
+//     a: 1,
+//     b:: { c: { d: 2 } },
+//     e:{f:"objAssign1"}
+// }
+```
+
+* 方法3
+
+```js
+//方法3 使用递归实现深度克隆
+const test1 = '123';
+const test2 = { a: '123' };
+const test3 = { a: [1, 2, 3], b: { c: [21, { e: 2 }] } }
+function bar() { };
+const test4 = { a: bar, b: { c: function () { } } }
+function cloneDeep(cloneData) {
+let newData;
+// 如果是基本类型直接返回
+if (typeof cloneData != 'object') { return cloneData; }
+if (Array.isArray(cloneData)) {
+    newData = [];
+    for (let i = 0; i < cloneData.length; i++) {
+        newData[i] = arguments.callee(cloneData[i])
+    }
+} else {
+    newData = {}
+    for (k in cloneData) {
+        if (cloneData.hasOwnProperty(k)) {
+            newData[k] = arguments.callee(cloneData[k])
+        }
+    }
+}
+return newData;
+}
+const clone1 = cloneDeep(test1);
+console.log('clone1: ', clone1);
+const clone2 = cloneDeep(test2);
+console.log('clone2: ', clone2);
+const clone3 = cloneDeep(test3);
+clone3.a[1] = 'clone3'
+console.log('clone3: ', clone3);
+const clone4 = cloneDeep(test4);
+clone4.a = 123;
+console.log('clone4: ', clone4);
+console.log('test4: ', test4)
+```
