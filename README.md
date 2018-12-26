@@ -2,7 +2,9 @@
 
 ## js基础
 
-* [执行上下文 : Execution Context](src/context/index.md)
+* [执行上下文(Execution Context)](src/context/index.md)
+
+* [变量对象(Variable Object )](jsBase/variableObject/index.md)
 
 ## ES6、ES7、ES8
 * [es6学习笔记](https://github.com/FearlessMa/ES6-Notes)
@@ -17,7 +19,7 @@
 
 ## 工具函数
 
-* [浅、深克隆的实现](utils/cloneDeep/index.md)
+* [深、浅克隆的实现](utils/cloneDeep/index.md)
 
 ## 排序实现
 
@@ -69,6 +71,6 @@
 
 # 其他记录
 
-* [markdownx资料](https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/markdown-basics)
+* [markdown资料](https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/markdown-basics)
 
 ---

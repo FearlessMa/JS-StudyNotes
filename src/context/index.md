@@ -6,6 +6,11 @@
     * eval
 * js执行时是通过栈调用方式执行的
     * 栈底永远是 Golbal Context，函数在被执行的时候会被压入栈中，执行完成或者遇到return就会被弹出栈。
+
+* 当一个函数被执行，就会在栈中生成一个该函数的执行上下文，执行上下文的声明周期分为2个阶段
+  * 创建阶段
+  * 执行阶段
+
 * 栗子：
 ```js
     function fn(a) {
@@ -35,27 +40,47 @@
         * 函数引用
         * 执行代码
 ```js
-    // 栗子
-        function contextFn() {
-            console.log(a);
-            console.log(fn);
-            var a = 'a';
-            function fn() {
+// 栗子
+    function contextFn() {
+        console.log(a);
+        console.log(fn);
+        var a = 'a';
+        function fn() {
 
-            }
-            fn = 'fn';
-            console.log(fn);
         }
-        contextFn();
-        // contextFn 被压入栈中是执行上下文创建阶段：作用域链指向golbal，this指向window
-        function contextFn() {
-            function fn() { }
-            var a = undefined;
-            console.log(a); // undefined
-            console.log(fn); // fn(){}
-            a = 'a';
-            fn = 'fn';
-            console.log(fn);//fn
-        }
-        // 理解上下文context就理解了变量提升
+        fn = 'fn';
+        console.log(fn);
+    }
+    contextFn();
+    // contextFn 被压入栈中是执行上下文创建阶段：作用域链指向golbal，this指向window
+    function contextFn() {
+        function fn() { }
+        var a = undefined;
+        console.log(a); // undefined
+        console.log(fn); // fn(){}
+        a = 'a';
+        fn = 'fn';
+        console.log(fn);//fn
+    }
+    // 理解上下文context就理解了变量提升
+```
+
+```js
+//练习
+var name = "window";
+
+var p = {
+  name: 'Perter',
+  getName: function() {
+    // 利用变量保存的方式保证其访问的是p对象
+    var self = this;
+    return function() {
+      return self.name;
+    }
+  }
+}
+
+var getName = p.getName();
+var _name = getName(); //Perter
+console.log(_name);
 ```

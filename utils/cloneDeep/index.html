@@ -53,27 +53,19 @@
         //     e:{f:"objAssign1"}
         // }
 
-        //方法3 使用递归实现深度克隆
+        //方法3 使用递归实现深度克隆(只实现obj、arr、fun)
         const test1 = '123';
         const test2 = { a: '123' };
         const test3 = { a: [1, 2, 3], b: { c: [21, { e: 2 }] } }
         function bar() { };
         const test4 = { a: bar, b: { c: function () { } } }
         function cloneDeep(cloneData) {
-            let newData;
             // 如果是基本类型直接返回
             if (typeof cloneData != 'object') { return cloneData; }
-            if (Array.isArray(cloneData)) {
-                newData = [];
-                for (let i = 0; i < cloneData.length; i++) {
-                    newData[i] = arguments.callee(cloneData[i])
-                }
-            } else {
-                newData = {}
-                for (k in cloneData) {
-                    if (cloneData.hasOwnProperty(k)) {
-                        newData[k] = arguments.callee(cloneData[k])
-                    }
+            let newData = Array.isArray(cloneData) ? [] : {};
+            for (k in cloneData) {
+                if (cloneData.hasOwnProperty(k)) {
+                    newData[k] = arguments.callee(cloneData[k])
                 }
             }
             return newData;
@@ -89,7 +81,7 @@
         clone4.a = 123;
         console.log('clone4: ', clone4);
         console.log('test4: ', test4);
-
+        //4 考虑RegExp、Error、循环引用 参考lodash的cloneDeep
     </script>
 </body>
 

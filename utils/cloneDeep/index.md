@@ -1,10 +1,12 @@
 # 深克隆、浅克隆
 
+* 参考资料[深拷贝文章](https://juejin.im/post/5ad6b72f6fb9a028d375ecf6)
+
 * js 基本类型按值传递 栈中存储值 Number、String、Boolean、null、undefined、Symbol
 * 引用类型 栈中存储指针，通过栈中指针找到堆中存储空间。Object、Array、Date、Error、Global、Function、RegExp、
 
 ## 浅克隆
-* 引用类型传递地址浅传递
+* 第一层拷贝，更深层为引用类型传递地址，浅传递
 ```js
 // 浅克隆
 // 引用类型传递地址浅传递
@@ -62,40 +64,36 @@ console.log('objAssign: ', objAssign);
 * 方法3
     * 使用递归实现深度克隆
 ```js
-//方法3 使用递归实现深度克隆
-const test1 = '123';
-const test2 = { a: '123' };
-const test3 = { a: [1, 2, 3], b: { c: [21, { e: 2 }] } }
-function bar() { };
-const test4 = { a: bar, b: { c: function () { } } }
-function cloneDeep(cloneData) {
-let newData;
-// 如果是基本类型直接返回
-if (typeof cloneData != 'object') { return cloneData; }
-if (Array.isArray(cloneData)) {
-    newData = [];
-    for (let i = 0; i < cloneData.length; i++) {
-        newData[i] = arguments.callee(cloneData[i])
-    }
-} else {
-    newData = {}
-    for (k in cloneData) {
-        if (cloneData.hasOwnProperty(k)) {
-            newData[k] = arguments.callee(cloneData[k])
+//方法3 使用递归实现深度克隆(只实现obj、arr、fun)
+    const test1 = '123';
+    const test2 = { a: '123' };
+    const test3 = { a: [1, 2, 3], b: { c: [21, { e: 2 }] } }
+    function bar() { };
+    const test4 = { a: bar, b: { c: function () { } } }
+    function cloneDeep(cloneData) {
+        // 如果是基本类型直接返回
+        if (typeof cloneData != 'object') { return cloneData; }
+        let newData = Array.isArray(cloneData) ? [] : {};
+        for (k in cloneData) {
+            if (cloneData.hasOwnProperty(k)) {
+                newData[k] = arguments.callee(cloneData[k])
+            }
         }
+        return newData;
     }
-}
-return newData;
-}
-const clone1 = cloneDeep(test1);
-console.log('clone1: ', clone1);
-const clone2 = cloneDeep(test2);
-console.log('clone2: ', clone2);
-const clone3 = cloneDeep(test3);
-clone3.a[1] = 'clone3'
-console.log('clone3: ', clone3);
-const clone4 = cloneDeep(test4);
-clone4.a = 123;
-console.log('clone4: ', clone4);
-console.log('test4: ', test4)
+    const clone1 = cloneDeep(test1);
+    console.log('clone1: ', clone1);
+    const clone2 = cloneDeep(test2);
+    console.log('clone2: ', clone2);
+    const clone3 = cloneDeep(test3);
+    clone3.a[1] = 'clone3'
+    console.log('clone3: ', clone3);
+    const clone4 = cloneDeep(test4);
+    clone4.a = 123;
+    console.log('clone4: ', clone4);
+    console.log('test4: ', test4);
 ```
+* 方法4 
+  * 考虑RegExp、Error、循环引用 
+    * 参考lodash的cloneDeep
+    * 参考资料[深拷贝文章](https://juejin.im/post/5ad6b72f6fb9a028d375ecf6)
