@@ -2,6 +2,8 @@
 
 ## js基础
 
+* [js知识汇总](jsBase/baseAll/index.md)
+
 * [执行上下文(Execution Context)](src/context/index.md)
 
 * [变量对象(Variable Object )](jsBase/variableObject/index.md)
