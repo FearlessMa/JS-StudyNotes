@@ -10,39 +10,61 @@
 
 <body>
     <script>
-       // js代码执行过程
-    // 1.编译器执行js代码->可执行代码
+        // js代码执行过程
+        // 1.编译器执行js代码->可执行代码
         // 编译器：
         // 1.词法分析
         // 2.语法分析
         // 3.可执行代码生成
         // 4.作用域规则确定
-    // 2.可执行代码->执行阶段 javaScript引擎执行
+        // 2.可执行代码->执行阶段 javaScript引擎执行
         // 创建执行上下文（全局环境，函数环境，eval）
-            // js执行栈
-              // 栈底 全局环境执行上下文 global 关闭页面时出栈
-              // 函数被执行时，入栈，
-                // 创建执行上下文：
-                  // 创建变量对象(VO:variable Object)
-                      // 创建arguments对象
-                      // 检查function声明创建function ：遇到相同变量名的function 会替换原有同名function的引用
-                      // 检查var声明创建变量 ： 创建var声明变量并赋值为undefined,如var声明变量名与已存在function名相同,则跳过var变量创建。
-                  // 建立作用域链
-                      // 作用域链：作用域链，是由当前环境与上层环境的一系列变量对象组成，它保证了当前执行环境对符合访问权限的变量和函数的有序访问。
-                      // scopeChain:[VO(current),VO(pre),...,VO(global)]
-                  // 确定this指向
+        // js执行栈
+        // 栈底 全局环境执行上下文 global 关闭页面时出栈
+        // 函数被执行时，入栈，
+        // 创建执行上下文：
+        // 创建变量对象(VO:variable Object)
+        // 创建arguments对象
+        // 检查function声明创建function ：遇到相同变量名的function 会替换原有同名function的引用
+        // 检查var声明创建变量 ： 创建var声明变量并赋值为undefined,如var声明变量名与已存在function名相同,则跳过var变量创建。
+        // 建立作用域链
+        // 作用域链：作用域链，是由当前环境与上层环境的一系列变量对象组成，它保证了当前执行环境对符合访问权限的变量和函数的有序访问。
+        // scopeChain:[VO(current),VO(pre),...,VO(global)]
+        // 确定this指向
         // 执行代码
-            // 处于栈顶的function
-            // VO->AO(Active Object)
-              // 1.变量赋值
-              // 2.执行function
-              // 3.执行其他代码
-    // 3.执行完毕 出栈
+        // 处于栈顶的function
+        // VO->AO(Active Object)
+        // 1.变量赋值
+        // 2.执行function
+        // 3.执行其他代码
+        // 3.执行完毕 出栈
         // 若无闭包生成,执行上下文失去引用，等待回收
-    // 闭包
+        // 闭包
 
-    // 垃圾回收
-      // 当一个值在内存中失去了引用,垃圾回收会根据算法找到回收它,并释放内存空间 
+        // 垃圾回收
+        // 当一个值在内存中失去了引用,垃圾回收会根据算法找到回收它,并释放内存空间 
+
+        // (function () {
+        //     var module = {};
+        //     module.exports = {
+
+        //     };
+        //     var exports = module.exports ;
+        //     return module.exports;
+        // })()
+
+        (function () {
+            var a = 1;
+            var b = 2;
+            function add(){
+                console.log(a+b);
+                return a+b;
+            }
+            window.add = add;
+        })();
+        add();
+
+
     </script>
 </body>
 

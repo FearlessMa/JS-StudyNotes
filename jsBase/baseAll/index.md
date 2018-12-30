@@ -11,7 +11,7 @@
 * js解释器执行代码->可执行代码
   * 词法分析
   * 语法分析
-    * 词法语法分析完成后生成AST语法数([TODO]())
+    * 词法语法分析完成后生成AST语法数([AST](https://segmentfault.com/a/1190000016231512))
   * 生成可执行代码
   * 作用域规则确定
 * js引擎->执行可执行代码
@@ -81,11 +81,14 @@
     * 事件循环执行顺序：
         * 先从script执行第一次循环，之后全局函数进入调用栈，其他函数被压入栈。
         * 在栈顶执行的函数中：
-            * 执行到macro-task任务，该任务进入macro-task任务列队。
-            * 执行到micro-task任务，该任务进入micro-task任务列队。
+            1. 执行到macro-task任务，该任务进入macro-task任务列队。
+            2. 执行到micro-task任务，该任务进入micro-task任务列队。
         * 执行栈被清空后：
-            * 首先执行一遍微任务(micro-task)任务列队。微任务列队执行完毕。
-            * 执行宏任务(macro-task)列队，这样一直循环下去.
+            1. 首先执行一遍微任务(micro-task)任务列队。微任务列队执行完毕。
+            2. 执行宏任务(macro-task)列队，这样一直循环下去.
+        * 闭包的应用场景
+            * 模块化 ：模拟块级作用域，对象内部变量私有化
+            * 柯里化 ：
 ```js
 
 console.log(1);//同步执行
@@ -116,7 +119,21 @@ console.log(6);//同步代码
 
 * **[闭包](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures)**
     * 闭包： 执行上下中A中执行函数，该函数上下文B中引用了A变量对象中的值，就形成了闭包
+    
     * 栈顶函数执行完毕出栈，执行上下文没有失去引用。
+
+    * 注：使用闭包可以理解为2部分组成（1.定义闭包。2.可使用闭包。） 
+        * 定义闭包：是指有权访问另一个函数作用域中的变量的函数，创建闭包的最常见的方式就是在一个函数内创建另一个函数，通过另一个函数访问这个函数的局部变量
+        * 可使用闭包：通常是用**return或window.xx=xx**返回是因为要在外部使用闭包变量，可以理解成闭包的使用。
+    
+    * 使用闭包的优缺
+        * 优点：
+            1. 希望一个变量长期驻扎在内存中
+            2. 避免全局变量的污染
+            3. 私有成员的存在
+        * 缺点：
+            1. 内存浪费。这个内存浪费不仅仅因为它常驻内存，对闭包的使用不当会造成无效内存的产生。
+
 
 ```js
 
@@ -129,6 +146,73 @@ function A(){
 
 var b = A();
 b();//1
+
+function example(){
+    var a = 1;
+    function exampleInner(){
+        console.log(a);
+    }
+    window.a = exampleInner;
+}
+example();//生成闭包及外部引用。
+a();//访问闭包1
+
+//生成闭包，但是无法被out函数外部使用
+function out(){
+    var a = 1;
+    !function inner(){
+        console.log(a);
+    }()
+}
+
 ```
+![out函数debug截图](closure.jpeg)
+
+* 闭包的应用场景
+    * 模块化，模拟块级作用域，对象内部变量私有化
+    ```js
+        //块级作用域
+        for(var i=1; i<5; i++){
+            !function(i){
+                setTimeout(function(){
+                    console.log(i)
+                },i*1000);
+            }(i);
+        }
+        //1,2,3,4
+        //es6 let的作用域是块级作用域
+        for(let i=1; i<5; i++){
+            setTimeout(function(){
+                console.log(i)
+            },i*1000);
+        }
+        //1,2,3,4
+
+        //模块化，变量私有化
+        (function () {
+            var a = 1;
+            var b = 2;
+            function add(){
+                console.log(a+b);
+                return a+b;
+            }
+            window.add = add;
+        })();
+        add();
+
+    ```
+    * 柯里化 ：
+
+
 
 ##TODO
+
+
+## 参考资料
+
+* [前端进阶](https://segmentfault.com/a/1190000017562966)
+
+* [闭包](https://segmentfault.com/a/1190000000652891)
+
+[](https://cheogo.github.io/learn-javascript/201709/runtime.html)
+* [ast](https://juejin.im/post/5bfc21d2e51d4544313df666)
