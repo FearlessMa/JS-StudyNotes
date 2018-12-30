@@ -56,15 +56,96 @@
         (function () {
             var a = 1;
             var b = 2;
-            function add(){
-                console.log(a+b);
-                return a+b;
+            function add() {
+                console.log(a + b);
+                return a + b;
             }
             window.add = add;
         })();
         add();
 
+        var a = 123;
 
+        function testA() {
+            console.log('this: ', this);
+            console.log('this.a: ', this.a);
+        }
+        testA();
+        function testB() {
+            'use strict'
+            console.log('this: ', this);
+            // console.log('this.a: ', this.a);
+        }
+        testB();
+
+        var _this = null;
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+            _this = this;
+            console.log('this: ', this);
+        }
+        var person = new Person('per', 18);
+        console.log('person: ', person);
+        console.log('_this === person: ', _this === person);
+        // this:  Person {name: "per", age: 18}
+        // person:  Person {name: "per", age: 18}
+        // _this === person:  true
+
+        var name = '123';
+        var objCAB = {
+            name: 'cab'
+        }
+        function getName() {
+            console.log('this.name: ', this.name);
+        }
+        getName();
+        getName.call(objCAB);
+        getName.apply(objCAB);
+        getName.bind(objCAB)();
+
+        function gets(num) {
+            console.log('this.name: ', this.name);
+            console.log('num: ', num);
+        }
+        // call实现
+        Object.prototype.newCall = function (content) {
+            content.fn = this;
+            //通过es6 获取 args
+            var args = Array.from(new Set(arguments)).slice(1);
+            content.fn(...args);
+            delete content.fn;
+        }
+        gets.newCall(objCAB, 111);
+        // this.name:  cab
+        //  num:  111
+
+        //apply 实现
+        Object.prototype.newApply = function (content) {
+            content.fn = this;
+            //通过es6 获取 args 
+            // 通过结构获得  调用newApply传入的数组
+            var [args] = Array.from(new Set(arguments)).slice(1);
+            content.fn(...args);
+            delete content.fn;
+        }
+        gets.newApply(objCAB, [222]);
+        // this.name:  cab
+        //  num:  222
+
+        // bind 实现
+
+        Object.prototype.newBind = function(content){
+            var _this = this;
+            var args = Array.from(new Set(arguments)).slice(1);
+            return function(){
+                _this.newCall(content,...args);
+            }
+        }
+        var testBind = gets.newBind(objCAB, 333);
+        testBind();
+        // this.name:  cab
+        //  num:  333
     </script>
 </body>
 
