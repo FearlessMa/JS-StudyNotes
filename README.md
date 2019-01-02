@@ -8,12 +8,6 @@
 
 * [变量对象(Variable Object )](jsBase/variableObject/index.md)
 
-### HTTP
-
-* [fetch](https://segmentfault.com/a/1190000017562966)
-
-* [跨域](https://segmentfault.com/a/1190000017562966)
-
 ## ES6、ES7、ES8
 
 * [es6学习笔记](https://github.com/FearlessMa/ES6-Notes)
@@ -34,12 +28,12 @@
 
 * [插入、选择、冒泡排序实现](sort/index.md)
 
-# H5总结
+## H5总结
 
-# TypeScript
+## TypeScript
 
 
-# React
+## React
 
 * [react-createElement实现](https://github.com/FearlessMa/imitate-react)
 
@@ -54,32 +48,49 @@
 * mobx
 
 
-
-# NodeJS学习
+## NodeJS学习
 
 * [nodejs学习笔记](https://github.com/FearlessMa/learn-Nodejs)更新ing
+
 ## webpack学习
 
 * [babel7&webpack4使用](https://github.com/FearlessMa/Babel7-Webpack4)
 
+## 计算机网络
 
-# HTTP&网络协议
+* [计算机网络基础](https://github.com/Snailclimb/JavaGuide/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C.md)
+
+* [计算机网络视频](https://edu.aliyun.com/lesson_152_1896?spm=5176.10731542.0.0.ScMj6k#_1896)
+
+### HTTP
+
+* [fetch](https://segmentfault.com/a/1190000017562966)
+
+* [跨域](https://segmentfault.com/a/1190000017562966)
 
 
-# 设计模式
+## Linux
+
+* [linux](https://github.com/Snailclimb/JavaGuide/blob/master/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%90%8E%E7%AB%AF%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BF%85%E5%A4%87%E7%9A%84Linux%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.md)
+
+* [linux视频](https://edu.aliyun.com/lesson_85_1219?spm=5176.10731542.0.0.hAiDZ6#_1219)
+
+* [shell](https://github.com/Snailclimb/JavaGuide/blob/master/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Shell.md)
+
+## 设计模式
 
 
-# C学习笔记
+## C学习笔记
 
 * [c学习笔记](https://github.com/FearlessMa/C-language-Note)更新ing
 
 
-# JAVA学习笔记
+## JAVA学习笔记
 
 * [java学习笔记](https://github.com/FearlessMa/Learn-Java)更新ing
 
 
-# 其他记录
+## 其他记录
 
 * [markdown资料](https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/markdown-basics)
 
