@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>proxy,getter,setter</title>
+</head>
+
+<body>
+    <script>
+        // es5 getter setter
+        // var es5Obj = {
+        //     name: 'es5'
+        // };
+        // (function () {
+        //     var name = 'defineProperty';
+        //     Object.defineProperty(es5Obj, 'name', {
+        //         get: function () {
+        //             console.log('es5 getter');
+        //             return name;
+        //         },
+        //         set: function (value) {
+        //             console.log('set value: ', value);
+        //             name = 'setValue=' + value;
+        //         }
+        //     });
+        // })()
+        // console.log('es5Obj: ', es5Obj);
+        // console.log('es5Obj.name: ', es5Obj.name);
+        // es5Obj.name = '123';
+        // console.log('es5Obj.name: ', es5Obj.name);
+
+        // es6
+        class Es6Class {
+            constructor(obj) {
+                this.description = obj;
+            }
+            get age() {
+                console.log('this: ', this);
+                console.log('getter');
+                return this.description.age;
+            }
+            set age(value) {
+                console.log('value: ', value);
+                this.description.age = value;
+            }
+        }
+
+        const es6Obj = new Es6Class({ name: 'es6', age: 12 });
+        console.log('es6Obj: ', es6Obj);
+        console.log('es6Obj.description: ', es6Obj.description);
+        es6Obj.description.age = 'aaa';
+        es6Obj.age;
+        es6Obj.age = 111;
+        console.log('es6Obj.description: ', es6Obj.description);
+    </script>
+</body>
+
+</html>

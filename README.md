@@ -12,6 +12,8 @@
 
 * [es6学习笔记](https://github.com/FearlessMa/ES6-Notes)
 
+* [Proxy、getter、setter]()
+
 ## js实现
 
 * [生成长度为m，值为n的数组，不使用for循环实现](src/createArray/index.md)
