@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>null、undefined</title>
+</head>
+<body>
+    <script>
+        // null
+        var a = null;
+        var b = null;
+        console.log('a===b',a===b);//true
+        console.log('typeof null: ', typeof null);//typeof null:  object
+        // undefined
+        var undefined = 1 ;
+        var a1 = undefined;
+        var b1 = undefined;
+        console.log('a1===b1',a1===b1);//true
+        console.log('undefined: ', undefined);
+        function foo (){
+            undefined = 2;
+            console.log('undefined: ', undefined);
+            var undefined = 3;
+            console.log('undefined: ', undefined);
+            
+        }
+        foo();
+        console.log('undefined: ', undefined);
+        function test(){
+            return void 0;
+        }
+        console.log('test(): ', test());//test():  undefined
+    </script>
+</body>
+</html>
