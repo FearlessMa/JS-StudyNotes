@@ -21,6 +21,7 @@
 
 * undefined指的是没有值(missing value)
     * undefined是指从未赋值。
+    * 可使用void 获得undefined ：void 0或void(0)
     * undefined 是一个标识符，可以被赋值。
     * undefined 可以通过void表达式获得，void在c、java中表示无返回值。
     * 在全局下给undefined赋值，结果为undefined。
