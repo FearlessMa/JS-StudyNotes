@@ -62,6 +62,8 @@
 
 * [nodejs学习笔记](https://github.com/FearlessMa/learn-Nodejs)更新ing
 
+* [NPM学习](npm/README.md)
+
 ## webpack学习
 
 * [babel7&webpack4使用](https://github.com/FearlessMa/Babel7-Webpack4)
