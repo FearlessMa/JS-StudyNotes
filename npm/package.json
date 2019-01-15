@@ -1,0 +1,30 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/",
+    "//": "运行eslint检查js代码",
+    "lint:js": "# 运行eslint检查js代码 \n eslint *.js",
+    "lint:css": "stylelint *.less",
+    "lint:json": "jsonlint --quiet *.json",
+    "lint:markdown": "markdownlint *.md",
+    "testAll": "npm run lint:js && npm run lint:css && npm run lint:json && npm run lint:markdown && mocha /test",
+    "testAll1": "npm run lint:js & npm run lint:css & npm run lint:json ",
+    "testAllWatch": "npm run lint:js & npm run lint:css & npm run lint:json & mocha -w /test",
+    "npmRunAll": "npm-run-all --parallel lint:*"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.12.0",
+    "jsonlint": "^1.6.3",
+    "markdownlint-cli": "^0.13.0",
+    "mocha": "^5.2.0",
+    "npm-run-all": "^4.1.5",
+    "stylelint": "^9.9.0",
+    "stylelint-config-standard": "^18.2.0"
+  }
+}

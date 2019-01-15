@@ -89,7 +89,7 @@
 
 ## 设计模式
 
-* [JavaScript 设计模式-极客学院](http://wiki.jikexueyuan.com/project/javascript-design-patterns/constructor-mode.html)
+* [JavaScript 设计模式-极客学院npm](http://wiki.jikexueyuan.com/project/javascript-design-patterns/constructor-mode.html)
 
 ## C学习笔记
 
