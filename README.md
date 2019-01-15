@@ -14,6 +14,8 @@
 
 * [es6学习笔记](https://github.com/FearlessMa/ES6-Notes)
 
+* [Symbol]()
+
 * [Map、Set]() TODO
 
 * [Proxy、getter、setter]() TODO
@@ -87,6 +89,7 @@
 
 ## 设计模式
 
+* [JavaScript 设计模式-极客学院](http://wiki.jikexueyuan.com/project/javascript-design-patterns/constructor-mode.html)
 
 ## C学习笔记
 
